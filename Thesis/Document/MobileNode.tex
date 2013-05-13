@@ -88,7 +88,7 @@ menys de 150 paraules.
 
 \cleardoublepage
 %FIN DE ABSTRACTE
-
+\selectlanguage{english}
 %PREFACI OPCIONAL. SI NO ES VOL, COMENTEU FINS EL FINAL DE PREFACI
 {\bf Prefaci}
 
@@ -102,51 +102,20 @@ menys de 150 paraules.
 %INDEX DE FIGURES; NOMÉS ES POSA SI HI HA FIGURES
 \listoffigures
 %Fa que aparegui al sumari
-\addcontentsline{toc}{chapter}{Índex de figures}
+\addcontentsline{toc}{chapter}{List of figures}
 
 %INDEX DE TAULES; NOMÉS ES POSA SI HI HA TAULES
 \listoftables
 %Fa que aparegui al sumari
-\addcontentsline{toc}{chapter}{Índex de taules}
+\addcontentsline{toc}{chapter}{List of tables}
 
 %COMENÇA EL TEXT
 \mainmatter
-\chapter*{Introducció}
-
-Aquesta és una plantilla o estil provisional per a ser usada per a presentar tesis doctorals a la UPF en format B5. S'ha intentat simplificar-la al màxim per tal que els usuaris experimentats puguin adaptar fàcilment els seus propis estils i que els usuaris menys avesats a treballar amb estils puguin usar-la fàcilment. 
-
-Consta de
-\begin{description}
-\item[El fitxer tesi-upf.cls] És una modificació de l'estil {\tt book} amb les següents particularitats
-  \begin{enumerate}
-  \item Es redissenya la portada (en la instrucció \verb+\maketitle+).
-
-  \item Els títols dels capítols s'escriuen en majúscula.
-
-  \item Es redefineix {\tt cleardoublepage} perquè les pàgines en blanc no vagin numerades.
-  \end{enumerate}
-
-\item[El preàmbul] Conté diferents instruccions
-  \begin{enumerate}
-  \item La combinació dels paquets {\tt geometry} i {\tt crop} permet emmarcar el que serà la pàgina final que després es retallarà a mida {\tt B5}. Abans de portar-ho a tallar es convenient eliminar les marques, comentant les corresponents comandes, a no ser que a la impremta ens ho demanin.
-
-  \item En cas que la tesi estigui en català, es redefineix el títol de ``Índex'' per ``Sumari''.
-
-  \item S'usa el paquet {\tt times} per usar aquest tipus de lletra.
-
-  \item S'indica \verb+\pagestyle{plain}+ perquè no apareguin els headings.
-
-  \item  A les comandes {\tt title}, {\tt subtitle}, {\tt author}, {\tt thyear},{\tt department}, {\tt supervisor} s'han de posar els valors adequats. \LaTeX generarà la portada a partir d'ells.
-  \end{enumerate}
-
-\item[paquets] Per la comoditat de l'usuari s'incorporen els paquets {\tt crop} i {\tt geometry}. 
-
-\item[Bibliografia] Per comprovar el funcionament s'incorpora una petita base de dades bibliogràfica, de nom \verb+tesi_upf_bib.bib+
+\chapter*{Introduction}
 
 
-\item[Taules] S'incorpora un \verb+figure+ i un \verb+tabular+ per a comprovar el funcionament dels índexs.
 
-\end{description}
+
 
 
 \section*{L'Índex}
@@ -170,8 +139,7 @@ com es menciona en \cite[p. 56]{sartre1984ser}
  i després de executar \LaTeX un parell de cops i el programa BibTeX (depenent de la distribució i l'editor) veurem com es generen les cites (quedarà ``com es menciona en \cite[p. 56]{sartre1984ser}'') i les referències al final del document (o on sigui que aparegui \verb+bibliography+).
 
 
-\item Una de les maneres de general el fitxer .bib és usar \verb+RefWorks+.
-
+\item Una de les maneres de general el fitxer .bib és usar \verb+RefWorks+. 
 \end{enumerate}
 
 
@@ -235,7 +203,7 @@ Cu est legimus reformidans. Nam cibo mucius dolores ad, prima posse similique vi
 
 
 
-\bibliography{exemple_bibtex}
+\bibliography{bibliography}
 
 
 
