@@ -14,6 +14,7 @@
 %PER A INCLOURE GRÀFICS I EL LOGO DE LA UPF
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{acronym}
 
 %FONTS TIMES O GARAMOND, 
 \usepackage{times}
@@ -110,6 +111,23 @@ menys de 150 paraules.
 %Fa que aparegui al sumari
 \addcontentsline{toc}{chapter}{List of tables}
 
+\cleardoublepage
+\thispagestyle{empty}
+\addcontentsline{toc}{chapter}{List of Abbreviations}
+\vspace*{1.95cm} \hspace*{-0.155cm} %,88
+\textbf{{\huge \sffamily List of Abbreviations}\\}
+\vspace*{0.5cm}         
+\begin{acronym}
+
+\acro{WMN}{Wireless Mesh Networks}
+\acro{AP}{Access Point}
+\acro{BSS}{Basic Service Set}
+\acro{MANET}{Mobile Ad-Hoc Network}
+\acro{GSF}{Gracia Sense fils}
+\acro{QMP}{Quick Mesh Project}
+
+\end{acronym}
+
 %COMENÇA EL TEXT
 \mainmatter
 \chapter{Introduction}
@@ -129,7 +147,7 @@ When we talk about mesh networks, we refer to networks where all the participant
 "\textit{A Mesh network is one where all nodes (participants) are routers, meaning that all the nodes accept and forward packets from other nodes according to the routing rules.}" \cite{paupfc}
 \\[12pt] 
 %Acronimo para añadir
-More specifically, we want to talk about Wireless Mesh Networks (WMN) which may refer also to the users of the network, and can be defined as follows:
+More specifically, we want to talk about \ac{WMN} which may refer also to the users of the network, and can be defined as follows:
 \\[10pt]
 "\textit{Wireless mesh networks often consist of mesh clients, mesh routers and gateways. The mesh clients are often laptops, cell phones and other wireless devices while the mesh routers forward traffic to and from the gateways which may but need not connect to the Internet.}" \cite{huynhsimulation}
 \\[12pt]
@@ -155,6 +173,91 @@ As mentioned above, there are only two different kind of nodes: mesh routers and
 Then, we can say that WMN are a subtype of mesh networks. They have all the properties of these networks with the only difference that all the nodes are connected wirelessly. 
 
 \subsection{Operating modes}
+\nocite{qmpPresentation}
+
+Mesh networks can operate in two different modes: Infrastructure mode and Ad-Hoc mode.
+
+\begin{itemize}
+	\item \textbf{Infrastructure Mode: }In this mode we have a central point named \ac{AP} that creates a \ac{BSS} zone in which all the packets have to go through the AP. This zone is identified by the MAC address of the AP, which is called BSSID in this context. Furthermore, we can say that a master/slave model is followed in infrastructure mode.
+	
+		\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/InfMode.png}}
+\captionof{figure}{Infrastructure Mode BSS}% only if needed
+\caption*{\cite{qmpPresentation}}
+\label{Infrastructure}
+\end{minipage}
+
+\clearpage
+	\item \textbf{Ad-Hoc Mode: }In Ad-Hoc mode, all the participants play the same role. Therefore, every single node connects with all the nodes it can, and so the central point idea disappears. To identify which participants are in the same network we just need to find those who have the same BSSID. At this point, all the machines directly connected can exchange information but, a layer 3 routing protocol is required to allow the communication between nodes which are not connected directly. 
+	
+	\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/AdhocMode.png}}
+\captionof{figure}{Ad-Hoc Mode BSS}% only if needed
+\caption*{\cite{qmpPresentation}}
+\label{Ad-hoc}
+\end{minipage}
+\end{itemize}
+
+\subsection{MANET Networks}
+
+\ac{MANET} is a subtype of a mesh network. That is to say, when we have a mesh network which uses a wireless system to interconnect the nodes and is built in Ad-hoc mode, we talk about \ac{MANET}. Another way to define it can be: A \ac{MANET} network is a \ac{WMN} which operates in Ad-Hoc mode. 
+\\[12pt]
+
+Usually, when we talk about \ac{MANET} we are also referring to networks which have a self-configuring property. This property relies on the fact that the routers within the network are free-to-move anytime and to anywhere. A good definition could be this:
+\\[12pt]
+
+"\textit{A Mobile Ad hoc NETwork (MANET) is a kind of wireless ad-hoc network, and is a self-configuring network of mobile routers (and associated hosts) connected by wireless links - the union of which forms an arbitrary topology.}"\cite{Manetdef}
+\\[12pt]
+
+
+\section{Open \ac{MANET} Networks in Barcelona}
+
+Nowadays, in Barcelona (and in some other cities) some MANET networks are being deployed. We will study this case in particular because is the one we are more familiar with. In general terms, all the deployments work in the same manner and so, studying one single case can give us a general a idea of all of them.
+\\[12pt]
+
+Normally, all these deployments only differ in some points, these are the more relevant ones:
+
+\begin{itemize}
+	\item The funding scheme
+	\item The kind of hardware
+	\item The firmware used 
+\end{itemize}
+
+
+\subsection{Funding scheme in Barcelona's \ac{MANET} networks}
+
+There are some examples of MANET networks successfully deployed in Barcelona:
+
+\begin{itemize}
+	\item Gràcia
+	\item Sants
+	\item Poble Nou
+	\item Sant Joan Despí
+\end{itemize}
+
+
+All these networks have been deployed using the same funding scheme, promoted by the Guifi.net foundation, and is, somehow, based on crowd-funding. Basically, anyone can install a new node and join to the mesh. There is just one restriction: you have to have direct vision with, at least, another node in the network. If you achieve this requirement, you can buy and install the node yourself and you expand the network. So, this is crowd-funding because every person joining the network funds its own equipment, which has the only requirement of being compatible with the firmware used. Since many people has no experience on installing and configuring the nodes, and despite the fact that both the hardware and software are specially designed to allow non-technical people to use it without problems, the foundation provides technical support for those who do not achieve in the installation. 
+
+\subsection{The Kind of hardware in Barcelona's \ac{MANET} networks}
+
+Being that the users are the owners of the network and so, the people who buy the equipment, usually low-cost hardware is used. Low-cost does not mean, low-quality, in fact some of the hardware used have very high features and a very good performance. Normally, the hardware used is from Ubiquity Networks (NanoStation, Rocket, Bullet, etc.), but it is not strictly necessary. Actually, any hardware compatible with the linux distribution openWRT is accepted. 
+\\[10pt]
+
+There are more information about some of this devices in annex 2.
+
+\subsection{The Firmware used in Barcelona's \ac{MANET} networks}
+
+This is maybe the most important difference between all the deployments around the world. In most of them, there is a common point: all the firmwares are openWRT based, but they have some differences. Particularly, in Barcelona the first deployments used the \ac{GSF} firmware, developed since 2003 for the Gracia Sense Fils Wireless Community. Some year later, the firmware became outdated since the protocol versions where old and the configuration of the nodes was hard. Then, they decided to create a new firmware with bigger scope, they named it \ac{QMP} and is the one being used currently (some nodes have to be migrated to \ac{QMP} yet).
+
+
+
+
 
 
 
