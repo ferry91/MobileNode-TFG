@@ -68,7 +68,7 @@
 
 
 %%%%%% Agraïments; si no es vol posar, comenteu fins a final de agraïments
-\noindent {\Large \sffamily Agraïments} Agraeixo....
+\noindent {\Large \sffamily Acknowledgments} This work was partially supported by the European Commission through the project Commons for Europe (CIP-ICT-PSP-2011-5-297191)
 
 \cleardoublepage
 
@@ -125,6 +125,11 @@ menys de 150 paraules.
 \acro{MANET}{Mobile Ad-Hoc Network}
 \acro{GSF}{Gracia Sense fils}
 \acro{QMP}{Quick Mesh Project}
+\acro{NAT}{Network Address Translation}
+\acro{BMX6}{BatMan-eXperimental version 6}
+\acro{OLSR6}{Optimized Linked State Routing version 6}
+\acro{DRP}{Dynamic Routing Protocol}
+\acro{IID}{Internal IDentifier}
 
 \end{acronym}
 
@@ -253,20 +258,156 @@ There are more information about some of this devices in annex 2.
 
 \subsection{The Firmware used in Barcelona's \ac{MANET} networks}
 
-This is maybe the most important difference between all the deployments around the world. In most of them, there is a common point: all the firmwares are openWRT based, but they have some differences. Particularly, in Barcelona the first deployments used the \ac{GSF} firmware, developed since 2003 for the Gracia Sense Fils Wireless Community. Some year later, the firmware became outdated since the protocol versions where old and the configuration of the nodes was hard. Then, they decided to create a new firmware with bigger scope, they named it \ac{QMP} and is the one being used currently (some nodes have to be migrated to \ac{QMP} yet).
+This is maybe the most important difference between all the deployments around the world. In most of them, there is a common point: all the firmwares are openWRT based, but they have some differences. Particularly, in Barcelona the first deployments used the \ac{GSF} firmware, developed since 2003 for the Gracia Sense Fils Wireless Community\footnote{More information at: http://graciasensefils.net/}. Some year later, the firmware became outdated since the protocol versions where old and the configuration of the nodes was hard. Then, they decided to create a new firmware with bigger scope, they named it \ac{QMP} and is the one being used currently (some nodes have to be migrated to \ac{QMP} yet).
+
+\ac{QMP} has been chosen in Barcelona because is a firmware that covers perfectly the needs in the deployments carried out there, and has been developed by themselves. Nowadays, in most of the deployments a new firmware is designed specially for them, and despite the fact that many of them could be used in other deployments, it does not normally happen. It is not an efficient way to work, and because of it a new initiative has just started, it is called "libre-mesh"\footnote{More information at: http://libre-mesh.org/}. This initiative tries to build a new firmware based on three existent ones: QMP (Spain), AlterMesh (Argentina) and eigenNet (Italy). It can be a good opportunity to merge all the best points of every firmware a create a new version that fits in many different scenarios.
+
+\section{\ac{QMP} firmware basics}\footnote{http://qmp.cat}
+
+\subsection{Main Features}
+
+\ac{QMP} is an Operating System designed for embedded devices, a firmware. The main features of this firmware are:
 
 
+\begin{itemize}
+	\item OpenWRT based
+	\item 802.11a/b/g/n support
+	\item IPv6 native
+	\item IPv4 tunneled over IPv6
+	\item Auto configuration system
+	\item Web GUI to monitor and configure
+	\item Visualization tools (maps, graphs, etc.)
+	\item Automatic dynamic routing  (zero-conf)
+	\item BGP (Border Gateway Protocol) support
+	\item Open Source 
+\end{itemize}
+
+\subsection{Quick Deployments}
+
+\ac{QMP} has been specially designed and developed to achieve quick network deployments. To do so, they have created the auto configuration feature which plays a very important role within the firmware. When we talk about quick deployments, we mean that we have to accomplish these requirements:
+ 
+ \begin{itemize}
+	 \item The deployment must be performed as fast as possible.
+	 \item It must be able to be done by non-technical people.
+	 \item It must be possible in most situations.
+\end{itemize}
+
+\subsection{Addressing}
+
+\ac{QMP} uses three different kind of IP addresses:
+
+\begin{itemize}
+	\item IPv6 ULA: IPv6 private range to be used internally in the mesh. These IPs are used for the communication among the nodes in the mesh network, and so they are not neither valid nor routable outside.
+	\item IPv6 RIPE: IPv6 public IPs range (6to6 tunneling). These are globally valid and routable.
+	\item IPv4: IPv4 private range to connect with the final user (4to6 tunneling). They are assigned to the final users attached to a node in the mesh, when 	they transmit any packet that has to travel throughout the mesh it is encapsulated in an IPv6 packet (tunneling).
+\end{itemize}
 
 
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/qmpAddr.png}}
+\captionof{figure}{QMP Addressing}% only if needed
+\caption*{\cite{qmpPresentation}}
+\label{AddrQMP}
+\end{minipage}
+
+\subsection{Operating modes}
+
+The firmware has two different operating modes, depending on the scenario we should choose one or the other:
 
 
+\begin{itemize}
+	\item Roaming for fast deployments: All the access points in this mode will have the same IP and the same ESSID in order to allow users mobility, namely, they will not lose the connection although they switch from an \ac{AP} to another. Every AP implements a \ac{NAT} and so, two users attached to different \ac{AP}s will not have direct vision between them.
 
-     
+	\item Community: Every node will have a randomly assigned IPs range and will announce this range through the mesh. There is not \ac{NAT}, every user has direct vision with the others (1 hope away from the IPv4 network layer point of view), but mobility is not allowed (no roaming).
+\end{itemize}
 
 
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/qmpModes.png}}
+\captionof{figure}{QMP Operating Modes}% only if needed
+\caption*{\cite{qmpPresentation}}
+\label{ModesQMP}
+\end{minipage}
+
+
+\subsection{\ac{DRP}}
+
+The firmware uses different protocols:
+
+
+\begin{itemize}
+	\item  \ac{BMX6} as the main \ac{DRP}.
+  \item  \ac{OLSR6} as a backup \ac{DRP}.
+  \item  Babel as a backup \ac{DRP} but optional. 
+\end{itemize}
+
+Usually, two networks are built in parallel the main one using \ac{BMX6} and the backup on using \ac{OLSR6}. There are two reasons for that:
+
+\begin{enumerate}
+	\item To prevent that a node gets isolated (no neighbors) due to a single \ac{BMX6} failure. 
+	\item To make performance measurements of both protocols in exactly the same environment. This was very useful at the beginning of the project to decide which protocol was better in every scenario.
+\end{enumerate}
+
+
+All these three protocols use IPv6 ULA to talk to other nodes and are isolated at the link layer (MAC) using VLANs. It allows the protocols to work in parallel (if necessary) without interfering with the other protocols. 
+
+
+\subsection{\ac{BMX6}}
+
+Since \ac{BMX6} is the main \ac{DRP} we are going to analyze it deeply:
+\\[10pt]
+
+\textit{\ac{BMX6} is a table-driven routing protocol for wireless mesh networks. [...] its goal is to compose a path from source to destination by deciding on each node which will be the next hop. \ac{BMX6} is a distance vector protocol, since the information each node manages is [...] destination node, next hop and cost. } \cite{Bmx6}
+\\[12pt]
+
+In terms of dissemination - how the nodes exchange the information - we can distinguish between two different states: transient and steady. 
+
+
+\begin{itemize}
+	\item Transient phase: the nodes exchange information related to the environment: \ac{IID}, nodes description, links, etc. Thanks to this information, ever single node builds a dictionary table that translates between \ac{IID} to the global hashes of the full node description.
+	\item Steady phase: every node has local information state (\ac{IID}-to-hash dictionary) and global information state as hash-to-description.  So, during this phase there is just a small exchange of packets that inform about link metrics and network changes. Thank to the tables set up in transient phase, those packet do not need to use the 128 bit IPv6 address as the identifier, they can use the 16 bit \ac{IID} which produces a much lower overhead. 
+\end{itemize}
+
+To summarize, we can say say that \ac{BMX6} controls the overhead better than other protocols (some experiments demonstrate that, for example: \cite{Bmx6}) there is a big overhead at the very beginning (transient state) and later it becomes very low during the steady state. So the main features of this protocol are:
+
+
+\begin{itemize}
+	\item Pro-active: Uses UDP flooding to periodically send Originator Messages (OGM) and build a routing table.
+	\item Destination-sequenced, Distance-vector (DSDV): 		Every node just knows which neighbor is better to reach another, namely, they do not need to know the entire topology, just the best paths.
+	\item Does not use IP as node identifier, it uses global identifiers using SHA2 hashing. 
+\end{itemize}
+
+
+In terms of the kind of frames used by \ac{BMX6} we have two different types:  periodic messages, periodically generated on every node and occasional messages, exchanged only when necessary. The most used are the periodical which are the following:
+
+\noindent%
+\begin{minipage}{\linewidth}
+%\begin{center}
+\begin{tabular}{| c | p{0.8\linewidth} |}
+\hline \textbf{Frame name} & \textbf{Description} \\
+\hline HELLO\_ADV & Hello advertisement. Used for letting neighboring nodes detect the link quality in transmit direction (from sending to receiving node).\\
+\hline RP\_ADV & Rx probe advertisement. Used for reporting about reception rate of hello messages from neighbouring nodes.\\
+\hline OGM\_ADV & OGM advertisement. Used for updating periodically route and metric information over the mesh.\\
+\hline OGM\_ACK & OGM acknowledgment. Used for acknowledging the previously reception of a full OGM\_ADV frame.\\
+\hline
+\end{tabular}
+\captionof{table}{BMX6 Frames}
+\caption*{\cite{paupfc}}
+\label{table:bmx6_frames}
+%\end{center} 
+\end{minipage}
+  
 
 \chapter{Methodology}
-TODO
+
+This thesis has mostly followed a trial and error methodology during the experiments. In general terms, has also, somehow, followed an agile approach. 
+
 \chapter{Contribution}
 
 \chapter{Results}
