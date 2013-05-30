@@ -20,6 +20,7 @@
 \usepackage{times}
 %\usepackage{garamond}
 
+\usepackage{pdfpages}
 %SENSE HEADINGS: NO MODIFICAR
 \pagestyle{plain}
 
@@ -254,19 +255,20 @@ All these networks have been deployed using the same funding scheme, promoted by
 Being that the users are the owners of the network and so, the people who buy the equipment, usually low-cost hardware is used. Low-cost does not mean, low-quality, in fact some of the hardware used have very high features and a very good performance. Normally, the hardware used is from Ubiquity Networks (NanoStation, Rocket, Bullet, etc.), but it is not strictly necessary. Actually, any hardware compatible with the linux distribution openWRT is accepted. 
 \\[10pt]
 
-There are more information about some of this devices in annex 2.
+There are more information about some of this devices in Appendix 2.
 
 \subsection{The Firmware used in Barcelona's \ac{MANET} networks}
 
 This is maybe the most important difference between all the deployments around the world. In most of them, there is a common point: all the firmwares are openWRT based, but they have some differences. Particularly, in Barcelona the first deployments used the \ac{GSF} firmware, developed since 2003 for the Gracia Sense Fils Wireless Community\footnote{More information at: http://graciasensefils.net/}. Some year later, the firmware became outdated since the protocol versions where old and the configuration of the nodes was hard. Then, they decided to create a new firmware with bigger scope, they named it \ac{QMP} and is the one being used currently (some nodes have to be migrated to \ac{QMP} yet).
+\\[12pt]
 
 \ac{QMP} has been chosen in Barcelona because is a firmware that covers perfectly the needs in the deployments carried out there, and has been developed by themselves. Nowadays, in most of the deployments a new firmware is designed specially for them, and despite the fact that many of them could be used in other deployments, it does not normally happen. It is not an efficient way to work, and because of it a new initiative has just started, it is called "libre-mesh"\footnote{More information at: http://libre-mesh.org/}. This initiative tries to build a new firmware based on three existent ones: QMP (Spain), AlterMesh (Argentina) and eigenNet (Italy). It can be a good opportunity to merge all the best points of every firmware a create a new version that fits in many different scenarios.
 
-\section{\ac{QMP} firmware basics}\footnote{http://qmp.cat}
+\section{\ac{QMP} firmware basics}
 
 \subsection{Main Features}
 
-\ac{QMP} is an Operating System designed for embedded devices, a firmware. The main features of this firmware are:
+\ac{QMP} \footnote{ http://qmp.cat} is an Operating System designed for embedded devices, a firmware. The main features of this firmware are:
 
 
 \begin{itemize}
@@ -385,6 +387,7 @@ To summarize, we can say say that \ac{BMX6} controls the overhead better than ot
 
 
 In terms of the kind of frames used by \ac{BMX6} we have two different types:  periodic messages, periodically generated on every node and occasional messages, exchanged only when necessary. The most used are the periodical which are the following:
+\\[12pt]
 
 \noindent%
 \begin{minipage}{\linewidth}
@@ -392,7 +395,7 @@ In terms of the kind of frames used by \ac{BMX6} we have two different types:  p
 \begin{tabular}{| c | p{0.8\linewidth} |}
 \hline \textbf{Frame name} & \textbf{Description} \\
 \hline HELLO\_ADV & Hello advertisement. Used for letting neighboring nodes detect the link quality in transmit direction (from sending to receiving node).\\
-\hline RP\_ADV & Rx probe advertisement. Used for reporting about reception rate of hello messages from neighbouring nodes.\\
+\hline RP\_ADV & Rx probe advertisement. Used for reporting about reception rate of hello messages from neighboring nodes.\\
 \hline OGM\_ADV & OGM advertisement. Used for updating periodically route and metric information over the mesh.\\
 \hline OGM\_ACK & OGM acknowledgment. Used for acknowledging the previously reception of a full OGM\_ADV frame.\\
 \hline
@@ -403,12 +406,43 @@ In terms of the kind of frames used by \ac{BMX6} we have two different types:  p
 %\end{center} 
 \end{minipage}
   
-
-\chapter{Methodology}
-
-This thesis has mostly followed a trial and error methodology during the experiments. In general terms, has also, somehow, followed an agile approach. 
-
 \chapter{Contribution}
+
+As we mentioned in previous chapters, we wanted to find ways to contribute to current open mesh networks, by providing ideas, introducing new hardware (or new ways to use the existing one) or building applications that run over the network.
+\\[12pt]
+
+We can divide the contribution of this project in three different points:
+
+
+\begin{enumerate}
+	\item Study and documentation of the Mobile Node project
+	\item Installation of a node within Poblenou Mesh
+	\item Development of an audio and/or video streaming Android application
+\end{enumerate}
+
+
+\section{Mobile Node Project}
+
+\nocite{efrainMedia}
+The mobile node is a portable and auto-configurable transmission unit with wireless technology that offers mobility in the urban space. This node is designed to contribute to the digital mesh through existing networks. Furthermore, it provides connectivity with a wide range of different hardware: fixed nodes, other mobile nodes, smartphones, pc, tablets, etc.
+\\[12pt]
+
+The basic idea that lies behind the concept of the mobile node, is the socialization and modeling of the networks according to the interests and needs of communities and citizens, completely changing the paradigm. At present, networks are designed and deployed based on corporate and/or government interests, this fact does not allow the home user to control its data flows and, much less, get involved in the process.
+\\[12pt]
+
+In other words, what we are doing with the Mobile Node, is making the most of the hardware and firmware we have, combining them and using the resulting device in a different way. So, a mobile node, in our context, is a device that can be used to expand networks already deployed and give coverage to a zone where there was no coverage at this time. Therefore, we are taking advantage of the "Auto-configuration" feature of \ac{QMP} to provide Internet Access rapidly.
+\\[12pt]
+
+The main advantage of this device, is the speed and freedom that offers. Given this features, the most common usage	will be as a temporary solution to cover a particular zone during a certain period of time. It can be very useful in events, congresses, concerts, parties, etc. Which will  take just a few hours or days. Using this device in cities like Barcelona, where fixed mesh networks are quite extended, will allow the organizers of the events to provide Internet Access to the attendants in a very fast, easy and cheap manner. 
+\\[12pt]
+
+Although covering events is, perhaps, the main usage we can give to our mobile node it is not the only one. Since we are talking about open networks, with open firmware we have the freedom to use them as we prefer. Normally, the mobile nodes are supplied using batteries which will last just some hours, but it is not strictly necessary to use them that way. We could join a community or create a new one and model our own networks using mobile nodes, there are no restrictions considering that a mobile node is nothing but the same hardware and the same firmware used in a different way. 
+\\[12pt]
+
+Given all these facts, that is the reason why we talk about changing the paradigm and start modeling the networks according to the interests of those who are going to use them.
+\\[12pt]
+
+So, the biggest contribution we did in that field, was to write a document talking about the project, its origins, how to build our first mobile node, the hardware we need, how to configure some devices and build a small mesh, the prototypes that are being tested nowadays, etc. Since this is a project which is being carried out by Efraín Foglia with the support of Mobility Lab, we just took all the information and started doing experiments to build the networks and the nodes, but did not do anything new. So we created a document gathering all the information that will allow beginners to start learning and working in that field. This document can be found at appendix 2.    
 
 \chapter{Results}
 TODO
@@ -423,6 +457,19 @@ TODO
 
 
 \bibliography{bibliography}
+\cleardoublepage
+
+\chapter{Appendixes}
+\appendix
+
+\section{Appendix 1: Pilot Charter}
+\includepdf[pages={-}]{Appendix/projectcharterMN.pdf}
+
+\section{Appendix 2: Documentation}
+\includepdf[pages={-}]{Appendix/Documentation.pdf}
+
+\section{Appendix 3: QMP Presentation}
+\includepdf[pages={1-19}]{Appendix/QMPDemo.pdf}
 
 
 
