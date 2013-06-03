@@ -131,6 +131,9 @@ menys de 150 paraules.
 \acro{OLSR6}{Optimized Linked State Routing version 6}
 \acro{DRP}{Dynamic Routing Protocol}
 \acro{IID}{Internal IDentifier}
+\acro{WAN}{Wide Area Network}
+\acro{PoE}{Power over Ethernet}
+\acro{LAN}{Local Area Network}
 
 \end{acronym}
 
@@ -443,6 +446,149 @@ Given all these facts, that is the reason why we talk about changing the paradig
 \\[12pt]
 
 So, the biggest contribution we did in that field, was to write a document talking about the project, its origins, how to build our first mobile node, the hardware we need, how to configure some devices and build a small mesh, the prototypes that are being tested nowadays, etc. Since this is a project which is being carried out by Efraín Foglia with the support of Mobility Lab, we just took all the information and started doing experiments to build the networks and the nodes, but did not do anything new. So we created a document gathering all the information that will allow beginners to start learning and working in that field. This document can be found at appendix 2.    
+
+\section{New node in Poblenou Mesh}
+
+As we already mentioned in previous chapters, nowadays, Barcelona has plenty of open mesh networks working, one of them is the one placed at Poblenou neighborhood. Most of the nodes of the network, are still using the old firmware \ac{GSF} and some members of guifi.net and some volunteers are trying to update all of them to \ac{QMP}. Since our campus is placed in Poblenou and the main building in one of the tallest of the neighborhood we decided to contribute to the mesh by placing a node on the roof of that building. 
+\\[12pt]
+
+Being that it was the first time we were working with this kind of firmware and hardware we followed a set of steps before deploying the node.
+
+\subsection{Choice of Hardware}
+
+Given the position and height of the building, and the physical situation of the other nodes, we made a first approximation which said that we should cover an angle between 70 and 100 degrees. Thanks to the previous experience of the \ac{QMP} and guifi.net teams, the decision did not take too much time since they solved many similar situations in the past. Their recommendation was to use a Rocket M5 from Ubiquity Networks together with a 90 degrees sector antenna. 
+\\[12pt]
+
+The main features of these hardware are:
+
+
+\begin{itemize}
+	\item Rocket M5: 
+	
+	\begin{itemize}
+		\item Description: Outdoor base station which transmits in the 5GHz band
+		\item Protocols: 802.11a, 802.11n
+		\item Outside reach: more than 50km (depending on the antenna)
+		\item Transmission frequency: 4900-5800MHz
+		\item Max. Transmitted power: 27 dBm
+	\end{itemize}
+	
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.35 \linewidth]{Images/rocket.jpg}}
+\captionof{figure}{Rocket M5}% only if needed
+\label{rocket}
+\end{minipage}
+\\[10pt]
+
+	\item Airmax 5G-17-90:
+	
+	\begin{itemize}
+		\item Description: 90 Degree, 5 Ghz, MIMO, 17 dbi Sector antenna for ROCKET M5
+	\end{itemize}
+	
+	\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/airmaxRocket.jpg}}
+\captionof{figure}{Airmax 5G-17-90}% only if needed
+\label{airmaxRocket}
+\end{minipage}
+
+\end{itemize}
+
+\subsection{Lab Testbed}
+
+In order to test the hardware and firmware before deploying the node, we created a testbed in the lab. We took three different nodes, installed \ac{QMP} and built a small mesh to get familiar with this kind of networks. 
+\\[12pt] 
+
+The devices we chose were: Nanostation M5, Alix 2D2 and Rocket M5. We flashed\footnote{More details on how to flash the nodes in appendix 2} them with the most recent version of the firmware and we got an indoor mesh:
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/firstMesh.png}}
+\captionof{figure}{First testing mesh}% only if needed
+\label{firstMesh}
+\end{minipage}
+\\[10pt]
+
+Thanks to the firmware, the nodes recognized each other in a few seconds and the network was deployed automatically. The next step was to set at least one of the nodes as a gateway to a wider network, the Internet in this case. We connected the \ac{WAN} interface of the Nanostation to a switch with an output to the Internet and waited for a result. In a few seconds, the Nanostation had announced this gateway throughout the mesh and so, all the nodes added a new entry to their tables showing the path to get this network.
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.9 \linewidth]{Images/gatewayMesh.png}}
+\captionof{figure}{First testing mesh with gateway}% only if needed
+\label{gatewayMesh}
+\end{minipage}
+\\[10pt]
+
+Afterwards, we wanted to test if this gateway was actually working or not. To do so, we connected some clients via Wi-Fi to the Alix and tried to access to the Internet from them. 
+
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.9 \linewidth]{Images/clientsMesh.png}}
+\captionof{figure}{First testing mesh with gateway and clients}% only if needed
+\label{clientsMesh}
+\end{minipage}
+\\[10pt]
+
+It worked as expected, and we could access the Internet without problems, fact that proved that we had built the mesh properly and that both hardware and firmware were doing their job perfectly. 
+
+\subsection{Physical installation of the Rocket M5}
+
+Once we had tested that the hardware was working well and that we could build a mesh without problems, we proceeded to the installation of the device on the roof of the building. To do so, we just needed to point the antenna to the right direction and set the same transmission channel of the other nodes. Here we have some pictures of the result:
+\\[10pt]
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/rocket1.jpg}}
+\captionof{figure}{Rocket M5 installed on the roof of Roc Boronat Building (1)}% only if needed
+\label{rocketinstalled1}
+\end{minipage}
+
+\clearpage
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/rocket2.jpg}}
+\captionof{figure}{Rocket M5 installed on the roof of Roc Boronat Building (2)}% only if needed
+\label{rocketinstalled2}
+\end{minipage}
+\\[12pt]
+
+To be able to supply the node, and access to it to change the configuration or check any feature, we connected both  the \ac{PoE} and \ac{LAN} interfaces to a switch which allowed us to do both things:
+\clearpage
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.8 \linewidth]{Images/rocketSwitch.jpg}}
+\captionof{figure}{Rocket M5 connected to the Switch}% only if needed
+\label{rocketSwitch}
+\end{minipage}
+\\[12pt]
+
+At the moment, we are waiting for the other nodes to do the migration from \ac{GSF} to \ac{QMP} to see if everything is working as expected. 
+\clearpage
+
+\section{Mobile Node Android Application}
+
+
 
 \chapter{Results}
 TODO
