@@ -583,12 +583,55 @@ To be able to supply the node, and access to it to change the configuration or c
 \end{minipage}
 \\[12pt]
 
-At the moment, we are waiting for the other nodes to do the migration from \ac{GSF} to \ac{QMP} to see if everything is working as expected. 
+At the moment, we have direct vision with one other node. At the same time, this node is connected to another one, so we have a mesh of three nodes deployed. 
+\clearpage
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=1.0 \linewidth]{Images/meshPoblenou.jpg}}
+\captionof{figure}{Poblenou Mesh nodes}% only if needed
+\label{meshPoblenou}
+\end{minipage}
+\\[12pt]
+
+We can also see the graph that displays how are the nodes connected among them:
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=1.0 \linewidth]{Images/meshNodes.jpg}}
+\captionof{figure}{Poblenou Mesh nodes distribution}% only if needed
+\label{meshNodes}
+\end{minipage}
+\\[12pt]
+
+The main purpose of these networks is to provide Internet Access, and in this particular network one of the nodes is acting as a gateway to the Internet and we can access to it from any of the nodes in the Mesh. 
+
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=1.0 \linewidth]{Images/meshLinks.jpg}}
+\captionof{figure}{Poblenou Mesh announced links}% only if needed
+\label{meshLinks}
+\end{minipage}
 \clearpage
 
 \section{Mobile Node Android Application}
 
+This application, is specially designed to work in a scenario together with the mobile node but it may work in any \ac{LAN}. The application basically streams the video and audio captured by the smartphone camera throughout the \ac{LAN} and any client within the network can receive it. So, we have two separated entities acting in this scenario: the app which is the server and a computer which is the client. 
 
+\subsection{Server side}
+
+The server side, will run the app in a smartphone and it will be usually done by the final user. The user, will just need to choose the options (frame rate, bit rate, height, etc) or leave the default ones and accept them. At this moment, the app is ready to receive incoming connections from any client. When a connection is received, the server will start the streaming session.
+
+\subsubsection{Use cases}
+
+  
 
 \chapter{Results}
 TODO
