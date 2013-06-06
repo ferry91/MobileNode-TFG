@@ -15,7 +15,7 @@
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage{acronym}
-
+\usepackage{multirow}
 %FONTS TIMES O GARAMOND, 
 \usepackage{times}
 %\usepackage{garamond}
@@ -629,9 +629,127 @@ This application, is specially designed to work in a scenario together with the 
 
 The server side, will run the app in a smartphone and it will be usually done by the final user. The user, will just need to choose the options (frame rate, bit rate, height, etc) or leave the default ones and accept them. At this moment, the app is ready to receive incoming connections from any client. When a connection is received, the server will start the streaming session.
 
-\subsubsection{Use cases}
+\subsubsection{Generic Use cases}
 
-  
+\noindent%
+\begin{minipage}{\linewidth}
+%\begin{center}
+\begin{tabular}{| c | p{0.7\linewidth} |}
+\hline \textbf{Case} & Open the app and choose the options\\
+\hline \textbf{Context} & The users wants to choose a particular configuration before starting the stream\\
+\hline \textbf{Primary Actors} & User\\
+\hline \textbf{Preconditions} & The user has the app installed in the Smartphone and has launched it.\\
+\hline \textbf{Post-conditions success} & The user chooses and accepts the settings and the app is ready to start the stream\\
+\hline \textbf{Post-conditions failure} & The settings cannot be accepted due to an internal error or a user's mistake. The streaming session cannot start.\\
+\hline \textbf{Main stage for Success} & 
+\begin{enumerate}
+	\item The user launches the app.
+	\item All the options (resolution, bitrate, framerate, etc) are chosen or left by default.
+	\item The settings are accepted.
+	\item The app is ready to start streaming sessions.
+\end{enumerate}
+\\
+\hline \textbf{Extensions} & -\\
+\hline
+\end{tabular}
+\captionof{table}{Server Side Use Case 1}
+\label{table:serverUseCases}
+%\end{center} 
+\end{minipage}
+
+\noindent%
+\begin{minipage}{\linewidth}
+%\begin{center}
+\begin{tabular}{| c | p{0.7\linewidth} |}
+\hline \textbf{Case} & Share the URL on Twitter before accepting the settings\\
+\hline \textbf{Context} & The users wants to share its URL on twitter\\
+\hline \textbf{Primary Actors} & User\\
+\hline \textbf{Preconditions} & The User presses the "Share Url" button\\
+\hline \textbf{Post-conditions success} & The twitter app (if installed) or the browser launch with a tweet ready to be posted.\\
+\hline \textbf{Post-conditions failure} & Neither the twitter app nor the browser launch, or they do it wrong.\\
+\hline \textbf{Main stage for Success} & 
+\begin{enumerate}
+	\item The user launches the app.
+	\item The user presses "Share Url" button.
+	\item Twitter app or browser launch.
+	\item The user presses the "send tweet" button.
+	\item The tweet is posted correctly.
+\end{enumerate}
+\\
+\hline \multirow{4}{*}{\textbf{Extensions}} & 3.a Neither twitter app nor browser launch\\
+ & 3.a.1 Return to Step 2\\
+ & 5.a The tweet is not posted\\
+ & 5.a.1 Return to Step 4\\
+\hline
+\end{tabular}
+\captionof{table}{Server Side Use Case 2}
+\label{table:serverUseCases2}
+%\end{center} 
+\end{minipage}
+
+\noindent%
+\begin{minipage}{\linewidth}
+%\begin{center}
+\begin{tabular}{| c | p{0.7\linewidth} |}
+\hline \textbf{Case} & Stop a streaming session once started\\
+\hline \textbf{Context} & The user wants to close a session\\
+\hline \textbf{Primary Actors} & User\\
+\hline \textbf{Preconditions} & A streaming session is running\\
+\hline \textbf{Post-conditions success} & The streaming session is closed correctly\\
+\hline \textbf{Post-conditions failure} & The session keeps alive\\
+\hline \textbf{Main stage for Success} & 
+\begin{enumerate}
+	\item The user launches the app.
+	\item The user accepts the options.
+	\item An clients connects.
+	\item The streaming session begins.
+	\item The user presses the "stop" button.
+	\item The session closes.
+\end{enumerate}
+\\
+\hline \multirow{3}{*}{\textbf{Extensions}} & 6.a The session does not close\\
+ & 6.a.1 Return to Step 5 if it is a button problem\\
+ & 6.a.2 Close the app, and return to step 1 if it is a client problem or a generic app problem\\
+\hline
+\end{tabular}
+\captionof{table}{Server Side Use Case 3}
+\label{table:serverUseCases3}
+%\end{center} 
+\end{minipage}
+\clearpage
+
+\subsubsection{Layout}
+
+The
+\\[12pt]
+
+
+
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.6\linewidth]{Images/app1.png}
+  \captionof{figure}{App Options Screen}
+  \label{fig:app1}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.6\linewidth]{Images/app2.png}
+  \captionof{figure}{App Main layout screen}
+  \label{fig:app2}
+\end{minipage}
+\\[12pt]
+
+\begin{minipage}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.6\linewidth]{Images/app3.png}
+  \captionof{figure}{App Main layout screen with camera on}
+  \label{fig:app3}
+\end{minipage}
+\\[12pt]
+ 
+
+
+
 
 \chapter{Results}
 TODO
