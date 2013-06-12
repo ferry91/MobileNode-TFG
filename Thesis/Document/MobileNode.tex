@@ -41,12 +41,11 @@
 
 
 %AFEGIU EN AQUESTA PART LES VOSTRES DADES
-\title{El títol de la tesi: Obligatori}
-\subtitle{El subtítol de la tesi: Opcional}
-\author{Autor: Obligatori}
-\thyear{L'any de la tesi: Obligatori}
-\department{Departament: Obligatori}
-\supervisor{Director: Obligatori}
+\title{A mobile streaming solution for IEEE 802.11 infrastructure and mesh networks}
+\author{Fernando Gros González}
+\thyear{2013}
+\department{Departament de Tecnologies de la Informació i les Comunicacions (DTIC)}
+\supervisor{Jaume Barceló, Efraín Foglia}
 
 
 \begin{document}
@@ -78,14 +77,15 @@
 %ABSTRACT EN DOS IDIOMES. COM A MÍNIM CATALÀ. SI L'ALTRE ÉS EN CASTELLA CANVIEU EL QUE POSA ABSTRACT
 \selectlanguage{english}
 \section*{\Large \sffamily Abstract}
-This is the abstract of the thesis in English.  Please, use less
-than 150 words.
+
+The Mobile Node is a platform that is being developed to provide temporary wireless network coverage to events. The Mobile Node uses IEEE 802.11 technology combined with the "quick mesh project" (QMP) firmware and advanced mesh routing protocols (BMX, OLSR). In this thesis we have documented how does this platform work internally and how can be used to improve existing fixed mesh networks. Furthermore, we have developed an audio and video streaming application for android devices. This application can be used in combination with the Mobile Node technology and also on its own by connecting to any IEEE 802.11 network.  When we combine this platform with the open mesh networks already deployed, we are providing the users with new solutions to continue improving their networks and to run applications over them.
 
 \selectlanguage{catalan}
 \vspace*{\fill}
 \section*{\Large \sffamily  Resum}
-Vet aquí el resum de la tesi en català.  Si us plau, utilitzeu
-menys de 150 paraules.
+
+El Node Mòbil es una plataforma que està essent desenvolupada per a proporcionar cobertura  de xarxa sense fils en esdeveniments. El Node Mòbil utilitza la tecnologia del IEEE 802.11 combinada amb el firmware "Quick Mesh Project" (QMP) i protocols d'enrutament avançats (BMX, OLSR). En aquest treball hem documentat com funciona internament aquesta plataforma i com es pot utilitzar per a millorar les xarxes mesh fixes ja existents. A més, hem desenvolupat una aplicació de streaming de àudio y vídeo per a dispositius Android.  Aquesta aplicació es pot utilitzar en combinació amb la tecnologia de Node Mòbil o en qualsevol xarxa IEEE 802.11. Quan combinem aquesta plataforma amb xarxes mesh obertes que ja estan desplegades,  estem oferint als usuaris noves solucions per a continuar millorant les seves xarxes i per a executar aplicacions sobre elles. 
+
 \vspace*{\fill}
 
 \selectlanguage{english}
@@ -93,9 +93,9 @@ menys de 150 paraules.
 %FIN DE ABSTRACTE
 
 %PREFACI OPCIONAL. SI NO ES VOL, COMENTEU FINS EL FINAL DE PREFACI
-{\bf Prefaci}
-
-\cleardoublepage
+%{\bf Prefaci}
+%
+%\cleardoublepage
 %FINAL DE PREFACI
 
 
@@ -112,6 +112,7 @@ menys de 150 paraules.
 %Fa que aparegui al sumari
 \addcontentsline{toc}{chapter}{List of tables}
 
+%INDEX DE ACRONIMS
 \cleardoublepage
 \thispagestyle{empty}
 \addcontentsline{toc}{chapter}{List of Abbreviations}
@@ -134,6 +135,7 @@ menys de 150 paraules.
 \acro{WAN}{Wide Area Network}
 \acro{PoE}{Power over Ethernet}
 \acro{LAN}{Local Area Network}
+\acro{RTSP}{Real Time Streaming Protocol}
 
 \end{acronym}
 
@@ -623,7 +625,7 @@ The main purpose of these networks is to provide Internet Access, and in this pa
 
 \section{Mobile Node Android Application}
 
-This application, is specially designed to work in a scenario together with the mobile node but it may work in any \ac{LAN}. The application basically streams the video and audio captured by the smartphone camera throughout the \ac{LAN} and any client within the network can receive it. So, we have two separated entities acting in this scenario: the app which is the server and a computer which is the client. 
+This application, is specially designed to work in a scenario together with the mobile node, however, it may work in any \ac{LAN}. The application basically streams the video and audio captured by the smartphone camera throughout the \ac{LAN} and any client within the network can receive it. So, we have two separated entities acting in this scenario: the app which is the server and a computer which is the client. 
 
 \subsection{Server side}
 
@@ -720,9 +722,8 @@ The server side, will run the app in a smartphone and it will be usually done by
 
 \subsubsection{Layout}
 
-The
+These are the main layouts of the application:
 \\[12pt]
-
 
 
 \begin{minipage}{0.5\textwidth}
@@ -747,14 +748,112 @@ The
 \end{minipage}
 \\[12pt]
  
+\subsection{Client side}
+
+For this side of the full system, we have used some open source software to receive the stream. It is important to say, that since this part of the system will not be used by the final user (in normal situations), but for the administrator, it is a little bit harder to make it work right. 
+\\[12pt]
+
+We may want two different things when we receive the stream:
 
 
+\begin{enumerate}
+	\item Play back the stream.
+  \item Record the stream.
+\end{enumerate}
+
+\subsubsection{Play Back}
 
 
-\chapter{Results}
-TODO
+The simplest way to connect to the server and play the stream is using a software compatible with \ac{RTSP} which is the protocol that uses the app to send the data. The most common one, and the one we have used in our tests, is VLC\footnote{http://www.videolan.org/vlc/}. During the tests, we have realized that in some cases the app and the player are not fully compatible and there are some problems during the first seconds of the session causing an unexpected timeout. 
+\\[12pt]
+
+
+Whenever we encounter this problem, we can use an intermediary between the app and vlc. This intermediary is a proxy server that establishes the connection with the RTSP Server in the app and allows multiple clients to connect to it an receive the stream. We have used an open source software called Live555 Proxy Server\footnote{http://www.live555.com/proxyServer/}. Using this intermediary, vlc is able to receive the stream much better (in some cases) than connecting directly to the app, and there are no errors. So the logic to make it work would be:
+
+
+\begin{enumerate}
+	\item Have an app with the server running
+	\item Open the proxy server and introduce the app's URL
+	\item Open VLC and introduce the new URL generated by the proxy server
+	\item Start watching the stream
+\end{enumerate}
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=1.0 \linewidth]{Images/appProxy.png}}
+\captionof{figure}{App with proxy and vlc diagram}% only if needed
+\label{appProxy}
+\end{minipage}
+
+\subsubsection{Record}
+
+In order to record the stream, we have been using a very lightweight open source software called openRTSP\footnote{http://www.live555.com/openRTSP/}. This software allows to connect directly with the app and save into a file all the data received. It is very useful in case we want to have a local copy of the stream to process it later in any way. It runs in a terminal an we just need to type a simple command indicating the record time, the height and width of the video, the bit rate and frame rate and the url of the server. An example of command would be this one: 
+\\[10pt]
+
+openRTSP -d 40 -4 -f 15 -w 640 -h 480 -b 400000 "rtsp://192.168.1.3:8086" \textgreater video.avi
+
+\subsection{Internal Work flow and challenges}
+
+Now that we know how do the application work from the outside, we will take a look at how does it work internally and we will explain some of the challenges we have had to achieve in order to make everything function well.
+\clearpage
+
+\subsubsection{Internal Work Flow}
+
+The logic that the application follows is this one:
+
+
+\begin{enumerate}
+	\item First of all, an activity that allows to choose the preferences is launched.
+	\item The user chooses the preferences and presses "Accept" button.
+	\item Internally, the app sends a message announcing its \ac{RTSP} URL and some information about the video settings.
+	\item A new activity is launched, and a connection with localhost is carried out in order to configure the camera with the preferences of the user.
+	\item Then the server is ready to receive connections.
+	\item When a connection is received, the Server creates a unique session ID for this client and exchanges some control data with the client.
+	\item Then, the Android Media Recorder and other classes are used to record and send the data captured by the camera.
+	\item When either the client or the server (pressing stop button) decide to close the session, all the information is removed in the server and the app becomes ready to receive other connections.
+\end{enumerate}
+
+\subsubsection{Challenges}
+
+The main challenges that we had to face when developing the application were:
+
+\begin{itemize}
+	\item How to stop a session from server side. This was a difficult part because, \ac{RTSP} does not implement a way to close a session from server side by default. In addition, there was a complex multithreading scheme working behind and closing a session was not trivial. In the end, we found a way to stop all the threads and subthreads that allowed us to achieve our goal.
+		\item How does the client side know the \ac{RTSP} URL and the video features of the server? This was maybe the biggest challenge of the project, it is very easy to know the URL when you have the smartphone in front of you, but the idea of this app is that the server and the client are run by different people. So, we had to, somehow, let the client know the IP address of the server. We tried different solutions, like sharing the URL on twitter or implementing an XMPP based chat between server and client. Since any of these solutions were not exactly what we were looking for, we decided to implement a multicast client-server application to share the information. IP Multicast is a technique for one-to-many or many-to-many real time communication over IP networks, the main idea is that all the participants join to a multicast group, and all the messages are sent just once setting the destination IP as the group IP. With this, and thanks to some protocols like  Internet Group Management Protocol(IGMP), whenever a message is sent to this IP, all the members of the group will receive it. It was perfect to solve our problem, because we did not need to know the IP address of the others to exchange information. 
+\end{itemize}
+\nocite{diot2000deployment}
+
+\subsection{Other information about the app}
+
+Some parts of the code, have been derived from some open-source projects such as: spydroid\footnote{https://code.google.com/p/spydroid-ipcamera/}, android-eye\footnote{https://github.com/Teaonly/android-eye}
+\\[12pt]
+
+The source code of the application can be found on github on the following site: https://github.com/ferry91/MobileNode-App
+\\[12pt]
+
+The application is under a GPL license, which means that any individual, organization or company has the freedoms to use, study, share(copy) and modify the software. And, since GPL is a copyleft license, all the derived works have to be distributed under the same license terms.
+\\[12pt]
+
+The application will be presented at Sonar in the Market Lab within the Sonar+D section\footnote{http://www.sonar.es/es/2013/pg/market-place\_221} in Friday 15th of June together with the Mobile Node and the Mobility Lab platform.
+
 \chapter{Conclusions}
-TODO
+
+During this thesis we have analyzed and studied some different topics, which can work independently or together. This is maybe the most important feature of this field, mesh networks can be open or not, can run application over them or not, can use a any compatible hardware and in any imaginable way. 
+\\[12pt]
+
+In terms of open mesh networks, we have studied some real cases which are currently deployed and working well. So, we could say that the model they have followed is, mostly, successful. As in any starting model, we always have some thing that can be improved, in particular in the cases we have studied we could highlight some of them:
+
+
+\begin{itemize}
+	\item The networks have been deployed in some neighborhoods with a relatively small amount of nodes, and most people do not even know them. To become known and the process of involving more people can be one of the things that need to be improved. The profile of the people involved is usually technical, but to make this networks grow and become important in people everyday life, something has to be changed. The dissemination of this projects is usually small and only people who is working on that fields or is really interested on them get to know them. We should start looking at open networks as a benefit for the society since they can be modeled and deployed following our needs and not the needs of corporations or organizations. It is true that it is still difficult to find ways to get people really involved with this kind of projects, only a small percentage of the population participates actively on them because they normally think that these are things that will benefit others but not themselves. 
+	\item In terms of hardware there is no problem because there is a wide variety of devices which can be used and they have similar performance and compatibility with the others.
+	\item The firmware is different at this point, the main problem  (as we mentioned before) is that every team develops its own firmware with the features they think are better. Therefore, for these people who is not used to this projects it can be a problem, being that they do not really know the difference among the different firmwares. It would be important to, somehow, standardize all the firmwares in one. Despite the fact that every deployment can have different needs, a single firmware may be able to be configured in different ways to reach that needs without having to develop a new one. 
+	
+\end{itemize}
+ 
+
 \chapter{Future Work}
 TODO
 
