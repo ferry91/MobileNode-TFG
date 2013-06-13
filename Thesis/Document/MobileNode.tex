@@ -78,13 +78,13 @@
 \selectlanguage{english}
 \section*{\Large \sffamily Abstract}
 
-The Mobile Node is a platform that is being developed to provide temporary wireless network coverage to events. The Mobile Node uses IEEE 802.11 technology combined with the "quick mesh project" (QMP) firmware and advanced mesh routing protocols (BMX, OLSR). In this thesis we have documented how does this platform work internally and how can be used to improve existing fixed mesh networks. Furthermore, we have developed an audio and video streaming application for android devices. This application can be used in combination with the Mobile Node technology and also on its own by connecting to any IEEE 802.11 network.  When we combine this platform with the open mesh networks already deployed, we are providing the users with new solutions to continue improving their networks and to run applications over them.
+The Mobile Node is a platform that is being developed to provide temporary wireless network coverage to events. The Mobile Node uses IEEE 802.11 technology combined with the ``quick mesh project'' (QMP) firmware and advanced mesh routing protocols (BMX, OLSR). In this thesis we have documented how does this platform work internally and how can be used to improve existing fixed mesh networks. Furthermore, we have developed an audio and video streaming application for android devices. This application can be used in combination with the Mobile Node technology and also on its own by connecting to any IEEE 802.11 network.  When we combine this platform with the open mesh networks already deployed, we are providing the users with new solutions to continue improving their networks and to run applications over them.
 
 \selectlanguage{catalan}
 \vspace*{\fill}
 \section*{\Large \sffamily  Resum}
 
-El Node Mòbil es una plataforma que està essent desenvolupada per a proporcionar cobertura  de xarxa sense fils en esdeveniments. El Node Mòbil utilitza la tecnologia del IEEE 802.11 combinada amb el firmware "Quick Mesh Project" (QMP) i protocols d'enrutament avançats (BMX, OLSR). En aquest treball hem documentat com funciona internament aquesta plataforma i com es pot utilitzar per a millorar les xarxes mesh fixes ja existents. A més, hem desenvolupat una aplicació de streaming de àudio y vídeo per a dispositius Android.  Aquesta aplicació es pot utilitzar en combinació amb la tecnologia de Node Mòbil o en qualsevol xarxa IEEE 802.11. Quan combinem aquesta plataforma amb xarxes mesh obertes que ja estan desplegades,  estem oferint als usuaris noves solucions per a continuar millorant les seves xarxes i per a executar aplicacions sobre elles. 
+El Node Mòbil es una plataforma que està essent desenvolupada per a proporcionar cobertura  de xarxa sense fils en esdeveniments. El Node Mòbil utilitza la tecnologia del IEEE 802.11 combinada amb el firmware ``Quick Mesh Project'' (QMP) i protocols d'enrutament avançats (BMX, OLSR). En aquest treball hem documentat com funciona internament aquesta plataforma i com es pot utilitzar per a millorar les xarxes mesh fixes ja existents. A més, hem desenvolupat una aplicació de streaming de àudio y vídeo per a dispositius Android.  Aquesta aplicació es pot utilitzar en combinació amb la tecnologia de Node Mòbil o en qualsevol xarxa IEEE 802.11. Quan combinem aquesta plataforma amb xarxes mesh obertes que ja estan desplegades,  estem oferint als usuaris noves solucions per a continuar millorant les seves xarxes i per a executar aplicacions sobre elles. 
 
 \vspace*{\fill}
 
@@ -136,6 +136,7 @@ El Node Mòbil es una plataforma que està essent desenvolupada per a proporcionar
 \acro{PoE}{Power over Ethernet}
 \acro{LAN}{Local Area Network}
 \acro{RTSP}{Real Time Streaming Protocol}
+\acro{NCD}{Network Characterization Daemon}
 
 \end{acronym}
 
@@ -155,15 +156,15 @@ First of all, we will analyze how these networks are, and how are they operating
 
 When we talk about mesh networks, we refer to networks where all the participant are also routers. If we had to set a single definition the following can be a good one:
 \\[10pt]
-"\textit{A Mesh network is one where all nodes (participants) are routers, meaning that all the nodes accept and forward packets from other nodes according to the routing rules.}" \cite{paupfc}
+``\textit{A Mesh network is one where all nodes (participants) are routers, meaning that all the nodes accept and forward packets from other nodes according to the routing rules.}'' \cite{paupfc}
 \\[12pt] 
 %Acronimo para añadir
 More specifically, we want to talk about \ac{WMN} which may refer also to the users of the network, and can be defined as follows:
 \\[10pt]
-"\textit{Wireless mesh networks often consist of mesh clients, mesh routers and gateways. The mesh clients are often laptops, cell phones and other wireless devices while the mesh routers forward traffic to and from the gateways which may but need not connect to the Internet.}" \cite{huynhsimulation}
+``\textit{Wireless mesh networks often consist of mesh clients, mesh routers and gateways. The mesh clients are often laptops, cell phones and other wireless devices while the mesh routers forward traffic to and from the gateways which may but need not connect to the Internet.}'' \cite{huynhsimulation}
 \\[12pt]
 
-To summarize, we have that mesh networks are basically networks which are not defined by the topology (physical layer) or the kind of links between two nodes (link layer). They are defined by the way the nodes operate among them, there are not master/slave or node/supernode distinctions and so, all the nodes have a similar function. In addition, the clients (end users) do not notice any difference (between mesh or other kind of networks) when they connect to the mesh, they are totally transparent for them. 
+To summarize, we have that mesh networks are basically networks which are not defined by the topology (physical layer) or the kind of links between two nodes (link layer). They are defined by the way the nodes operate among them, there are not master/slave or node/supernode distinctions and so, all the nodes have a similar function. In addition, the clients (end users) do not notice any difference (between mesh or other kind of networks) when they connect to the mesh, it is totally transparent for them. 
 \\[12pt]
 
 As mentioned above, there are only two different kind of nodes: mesh routers and mesh gateways. They operate in exactly the same way when they have to route packets within the network, the only difference is that the gateways may be connected to a wider network, namely, the Internet and they can route packets to this other network. So, mesh routers just route packets inside the mesh while mesh gateways can also route packets to the outside. 
@@ -223,7 +224,7 @@ Mesh networks can operate in two different modes: Infrastructure mode and Ad-Hoc
 Usually, when we talk about \ac{MANET} we are also referring to networks which have a self-configuring property. This property relies on the fact that the routers within the network are free-to-move anytime and to anywhere. A good definition could be this:
 \\[12pt]
 
-"\textit{A Mobile Ad hoc NETwork (MANET) is a kind of wireless ad-hoc network, and is a self-configuring network of mobile routers (and associated hosts) connected by wireless links - the union of which forms an arbitrary topology.}"\cite{Manetdef}
+``\textit{A Mobile Ad hoc NETwork (MANET) is a kind of wireless ad-hoc network, and is a self-configuring network of mobile routers (and associated hosts) connected by wireless links - the union of which forms an arbitrary topology.}''\cite{Manetdef}
 \\[12pt]
 
 
@@ -264,10 +265,10 @@ There are more information about some of this devices in Appendix 2.
 
 \subsection{The Firmware used in Barcelona's \ac{MANET} networks}
 
-This is maybe the most important difference between all the deployments around the world. In most of them, there is a common point: all the firmwares are openWRT based, but they have some differences. Particularly, in Barcelona the first deployments used the \ac{GSF} firmware, developed since 2003 for the Gracia Sense Fils Wireless Community\footnote{More information at: http://graciasensefils.net/}. Some year later, the firmware became outdated since the protocol versions where old and the configuration of the nodes was hard. Then, they decided to create a new firmware with bigger scope, they named it \ac{QMP} and is the one being used currently (some nodes have to be migrated to \ac{QMP} yet).
+This is maybe the most important difference between all the deployments around the world. In most of them, there is a common point: all the firmwares are openWRT based, but they have some differences. Particularly, in Barcelona the first deployments used the \ac{GSF} firmware, developed since 2003 for the Gracia Sense Fils Wireless Community\footnote{More information at: http://graciasensefils.net/}. Some year later, the firmware became outdated since the protocol versions were old and the configuration of the nodes was hard. Then, they decided to create a new firmware with bigger scope, they named it \ac{QMP} and is the one being used currently (some nodes have to be migrated to \ac{QMP} yet).
 \\[12pt]
 
-\ac{QMP} has been chosen in Barcelona because is a firmware that covers perfectly the needs in the deployments carried out there, and has been developed by themselves. Nowadays, in most of the deployments a new firmware is designed specially for them, and despite the fact that many of them could be used in other deployments, it does not normally happen. It is not an efficient way to work, and because of it a new initiative has just started, it is called "libre-mesh"\footnote{More information at: http://libre-mesh.org/}. This initiative tries to build a new firmware based on three existent ones: QMP (Spain), AlterMesh (Argentina) and eigenNet (Italy). It can be a good opportunity to merge all the best points of every firmware a create a new version that fits in many different scenarios.
+\ac{QMP} has been chosen in Barcelona because is a firmware that covers perfectly the needs in the deployments carried out there, and has been developed by themselves. Nowadays, in most of the deployments a new firmware is designed specially for them, and despite the fact that many of them could be used in other deployments, it does not normally happen. It is not an efficient way to work, and because of it a new initiative has just started, it is called ``libre-mesh''\footnote{More information at: http://libre-mesh.org/}. This initiative tries to build a new firmware based on three existent ones: QMP (Spain), AlterMesh (Argentina) and eigenNet (Italy). It can be a good opportunity to merge all the best points of every firmware a create a new version that fits in many different scenarios.
 
 \section{\ac{QMP} firmware basics}
 
@@ -370,7 +371,7 @@ All these three protocols use IPv6 ULA to talk to other nodes and are isolated a
 Since \ac{BMX6} is the main \ac{DRP} we are going to analyze it deeply:
 \\[10pt]
 
-\textit{\ac{BMX6} is a table-driven routing protocol for wireless mesh networks. [...] its goal is to compose a path from source to destination by deciding on each node which will be the next hop. \ac{BMX6} is a distance vector protocol, since the information each node manages is [...] destination node, next hop and cost. } \cite{Bmx6}
+``\textit{\ac{BMX6} is a table-driven routing protocol for wireless mesh networks. [...] its goal is to compose a path from source to destination by deciding on each node which will be the next hop. \ac{BMX6} is a distance vector protocol, since the information each node manages is [...] destination node, next hop and cost. }'' \cite{Bmx6}
 \\[12pt]
 
 In terms of dissemination - how the nodes exchange the information - we can distinguish between two different states: transient and steady. 
@@ -378,7 +379,7 @@ In terms of dissemination - how the nodes exchange the information - we can dist
 
 \begin{itemize}
 	\item Transient phase: the nodes exchange information related to the environment: \ac{IID}, nodes description, links, etc. Thanks to this information, ever single node builds a dictionary table that translates between \ac{IID} to the global hashes of the full node description.
-	\item Steady phase: every node has local information state (\ac{IID}-to-hash dictionary) and global information state as hash-to-description.  So, during this phase there is just a small exchange of packets that inform about link metrics and network changes. Thank to the tables set up in transient phase, those packet do not need to use the 128 bit IPv6 address as the identifier, they can use the 16 bit \ac{IID} which produces a much lower overhead. 
+	\item Steady phase: every node has local information state (\ac{IID}-to-hash dictionary) and global information state as hash-to-description.  So, during this phase there is just a small exchange of packets that informs about link metrics and network changes. Thank to the tables set up in transient phase, those packets do not need to use the 128 bit IPv6 address as the identifier, they can use the 16 bit \ac{IID} which produces a much lower overhead. 
 \end{itemize}
 
 To summarize, we can say say that \ac{BMX6} controls the overhead better than other protocols (some experiments demonstrate that, for example: \cite{Bmx6}) there is a big overhead at the very beginning (transient state) and later it becomes very low during the steady state. So the main features of this protocol are:
@@ -435,7 +436,7 @@ The mobile node is a portable and auto-configurable transmission unit with wirel
 The basic idea that lies behind the concept of the mobile node, is the socialization and modeling of the networks according to the interests and needs of communities and citizens, completely changing the paradigm. At present, networks are designed and deployed based on corporate and/or government interests, this fact does not allow the home user to control its data flows and, much less, get involved in the process.
 \\[12pt]
 
-In other words, what we are doing with the Mobile Node, is making the most of the hardware and firmware we have, combining them and using the resulting device in a different way. So, a mobile node, in our context, is a device that can be used to expand networks already deployed and give coverage to a zone where there was no coverage at this time. Therefore, we are taking advantage of the "Auto-configuration" feature of \ac{QMP} to provide Internet Access rapidly.
+In other words, what we are doing with the Mobile Node, is making the most of the hardware and firmware we have, combining them and using the resulting device in a different way. So, a mobile node, in our context, is a device that can be used to expand networks already deployed and give coverage to a zone where there was no coverage at this time. Therefore, we are taking advantage of the ``Auto-configuration'' feature of \ac{QMP} to provide Internet Access rapidly.
 \\[12pt]
 
 The main advantage of this device, is the speed and freedom that offers. Given this features, the most common usage	will be as a temporary solution to cover a particular zone during a certain period of time. It can be very useful in events, congresses, concerts, parties, etc. Which will  take just a few hours or days. Using this device in cities like Barcelona, where fixed mesh networks are quite extended, will allow the organizers of the events to provide Internet Access to the attendants in a very fast, easy and cheap manner. 
@@ -666,15 +667,15 @@ The server side, will run the app in a smartphone and it will be usually done by
 \hline \textbf{Case} & Share the URL on Twitter before accepting the settings\\
 \hline \textbf{Context} & The users wants to share its URL on twitter\\
 \hline \textbf{Primary Actors} & User\\
-\hline \textbf{Preconditions} & The User presses the "Share Url" button\\
+\hline \textbf{Preconditions} & The User presses the ``Share Url'' button\\
 \hline \textbf{Post-conditions success} & The twitter app (if installed) or the browser launch with a tweet ready to be posted.\\
 \hline \textbf{Post-conditions failure} & Neither the twitter app nor the browser launch, or they do it wrong.\\
 \hline \textbf{Main stage for Success} & 
 \begin{enumerate}
 	\item The user launches the app.
-	\item The user presses "Share Url" button.
+	\item The user presses ``Share Url'' button.
 	\item Twitter app or browser launch.
-	\item The user presses the "send tweet" button.
+	\item The user presses the ``send tweet'' button.
 	\item The tweet is posted correctly.
 \end{enumerate}
 \\
@@ -792,7 +793,7 @@ Whenever we encounter this problem, we can use an intermediary between the app a
 In order to record the stream, we have been using a very lightweight open source software called openRTSP\footnote{http://www.live555.com/openRTSP/}. This software allows to connect directly with the app and save into a file all the data received. It is very useful in case we want to have a local copy of the stream to process it later in any way. It runs in a terminal an we just need to type a simple command indicating the record time, the height and width of the video, the bit rate and frame rate and the url of the server. An example of command would be this one: 
 \\[10pt]
 
-openRTSP -d 40 -4 -f 15 -w 640 -h 480 -b 400000 "rtsp://192.168.1.3:8086" \textgreater video.avi
+openRTSP -d 40 -4 -f 15 -w 640 -h 480 -b 400000 ``rtsp://192.168.1.3:8086'' \textgreater video.avi
 
 \subsection{Internal Work flow and challenges}
 
@@ -806,7 +807,7 @@ The logic that the application follows is this one:
 
 \begin{enumerate}
 	\item First of all, an activity that allows to choose the preferences is launched.
-	\item The user chooses the preferences and presses "Accept" button.
+	\item The user chooses the preferences and presses ``Accept'' button.
 	\item Internally, the app sends a message announcing its \ac{RTSP} URL and some information about the video settings.
 	\item A new activity is launched, and a connection with localhost is carried out in order to configure the camera with the preferences of the user.
 	\item Then the server is ready to receive connections.
@@ -849,16 +850,31 @@ In terms of open mesh networks, we have studied some real cases which are curren
 \begin{itemize}
 	\item The networks have been deployed in some neighborhoods with a relatively small amount of nodes, and most people do not even know them. To become known and the process of involving more people can be one of the things that need to be improved. The profile of the people involved is usually technical, but to make this networks grow and become important in people everyday life, something has to be changed. The dissemination of this projects is usually small and only people who is working on that fields or is really interested on them get to know them. We should start looking at open networks as a benefit for the society since they can be modeled and deployed following our needs and not the needs of corporations or organizations. It is true that it is still difficult to find ways to get people really involved with this kind of projects, only a small percentage of the population participates actively on them because they normally think that these are things that will benefit others but not themselves. 
 	\item In terms of hardware there is no problem because there is a wide variety of devices which can be used and they have similar performance and compatibility with the others.
-	\item The firmware is different at this point, the main problem  (as we mentioned before) is that every team develops its own firmware with the features they think are better. Therefore, for these people who is not used to this projects it can be a problem, being that they do not really know the difference among the different firmwares. It would be important to, somehow, standardize all the firmwares in one. Despite the fact that every deployment can have different needs, a single firmware may be able to be configured in different ways to reach that needs without having to develop a new one. 
-	
+	\item The firmware is different at this point, the main problem  (as we mentioned before) is that every team develops its own firmware with the features they think are better. Therefore, for these people who is not used to this projects it can be a problem, being that they do not really know the differences among the different firmwares. It would be important to, somehow, standardize all the firmwares in one. Despite the fact that every deployment can have different needs, a single firmware may be able to be configured in different ways to reach that needs without having to develop a new one. 
 \end{itemize}
+
+As we have seen during this thesis, making a network grow has a lot of different connotations. It is not strictly necessary to make it grow in terms of size or number of nodes, you can just improve the performance or add a new functionality by choosing the most optimal firmware or building an application. 
+\\[12pt]
+
+The mobile node is a perfect example of this, a workstation which adds new possibilities to the existing networks with a combination of hardware and firmware. The mobile node application increases these possibilities even more, although it can be used without the mobile node itself. 
+\\[12pt]
+
+To conclude, we can say that all this initiatives try to improve they way we access the Internet nowadays. Not necessarily in terms of performance or speed, but in terms of covering the needs of the final users and offering them the opportunity to decide what is better for them in every single situation. 
  
 
 \chapter{Future Work}
-TODO
+
+This field is very open, and we will always be able to continue working and developing new features. Just to mention some of the possibilities that are being considered nowadays:
 
 
+\begin{itemize}
+	\item Developing a \ac{NCD} to publish some information about the nodes such as, WiFi links, Routing Neighbors, throughput of the links, number of routes, number of associated clients to a node, etc. This daemon may run inside every node and would publish the data periodically to a server in HTTP-JSON format. This can be a useful tool because we can derive lots of applications from it, for example, a mobile/web application to show the network topology in real-time, which would allow to find the best places to install new nodes. 
+	\item Try to develop a firmware which covers most of the needs of the users and becomes, somehow, a standard. This would avoid the current problem of having this variety of different firmware.
+	\item Think about new ways to combine hardware, firmware and apps to offer new possibilities to this networks.
+	\item Find ways to get more people involved on that initiatives, it is a difficult task but also a very important one.
+\end{itemize}
 
+As we can see, there are no limitations on that field. Any new combination, any new application related to this field can always improve the whole ecosystem.  
 
 
 
