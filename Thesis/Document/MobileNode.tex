@@ -250,19 +250,32 @@ IEEE 802.11 networks can operate in two different modes: Infrastructure mode and
 
 \subsection{MANET Networks}
 
-\ac{MANET} is a subtype of a mesh network. That is to say, when we have a mesh network which uses a wireless system to interconnect the nodes and is built in Ad-hoc mode, we talk about \ac{MANET}. Another way to define it can be: A \ac{MANET} network is a \ac{WMN} which operates in Ad-Hoc mode. 
-\\[12pt]
 
-Usually, when we talk about \ac{MANET} we are also referring to networks which have a self-configuring property. This property relies on the fact that the routers within the network are free-to-move anytime and to anywhere. A good definition could be this:
+As mentioned in previous sections a \ac{WMN} network is a network where all or part of the devices can route packets. We can distinguish three different kind of nodes in these networks:
+
+\begin{itemize}
+	\item Client: Simple device which cannot route packets. This devices just use the networks to get access to The Internet.
+	\item Router: Route packets throughout the network.
+	\item Gateway: Route packet throughout the network but also to the outside. 
+\end{itemize}
+
+So, a \ac{MANET} network is a \ac{WMN} with mobile devices.
 \\[12pt]
 
 ``\textit{A Mobile Ad hoc NETwork (MANET) is a kind of wireless ad-hoc network, and is a self-configuring network of mobile routers (and associated hosts) connected by wireless links - the union of which forms an arbitrary topology.}''\cite{Manetdef}
 \\[12pt]
 
+As mentioned, when we talk about \ac{MANET} we are also referring to networks which have a self-configuring property. This property relies on the fact that the routers within the network are free-to-move anytime and to anywhere.
+\\[12pt]
+
+
 
 \section{Open \ac{MANET} Networks in Barcelona}
 
-Nowadays, in Barcelona (and in some other cities) some MANET networks are being deployed. We will study this case in particular because is the one we are more familiar with. In general terms, all the deployments work in the same manner and so, studying one single case can give us a general a idea of all of them.
+Nowadays, in Barcelona (and in some other cities) some \ac{MANET} networks are being deployed. It is important to say, that according to many definitions in the literature these networks would be defined as \ac{WMN} but, the owners of these networks define them as \ac{MANET} and we will use this name for consistency.
+\\[12pt]
+
+We will study this case in particular because is the one we are more familiar with. In general terms, all the deployments work in the same manner and so, studying one single case can give us a general a idea of all of them.
 \\[12pt]
 
 Normally, all these deployments only differ in some points, these are the more relevant ones:
@@ -681,6 +694,51 @@ The main purpose of these networks is to provide Internet Access, and in this pa
 
 \section{Mobile Node Android Application}
 
+\subsection{Other streaming solutions}
+There are some other streaming solutions for android devices. Each of them has its pros and cons, and the reason why we decided to make a solution ourselves is that any of the existent ones fitted well with our project requirements. It is important to mention that most of these solutions are designed to video surveillance purposes instead of sharing contents. 
+
+\subsubsection{Spydroid}
+
+
+Spydroid is an application that streams the audio and video captured from the smartphone to a computer in the same network. In addition, it is an open source application quite powerful but, at the same time, very complex for our purposes. The design did not fit with our specifications either. So, we decided to take some ideas and some parts of the code from this app, but we modified and added many other things.
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.15 \linewidth]{Images/spydroid-logo.png}}
+\captionof{figure}{Spydroid Logo}% only if needed
+\label{spydroidlogo}
+\end{minipage}
+
+\subsubsection{Ip Webcam}
+
+Ip Webcam is a very professional and powerful video surveillance application which basically streams the video and audio from the smartphone to a computer in the same network. The concept is the same as ours (streaming), but the goal is different. The main problem with this app is that is a closed solution and we do not have access to the source code. Despite this fact, we have used it to take ideas on the design and the settings to configure the camera. 
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.15 \linewidth]{Images/ipwebcam-logo.png}}
+\captionof{figure}{Ip Webcam Logo}% only if needed
+\label{ipwebcamlogo}
+\end{minipage}
+
+\subsubsection{Wifi Camera}
+
+Wifi Camera is a very simple application that streams video from the smartphone to a computer in the same network. This application is an open source project which is too simple for our purposes. Nevertheless, we have taken some small parts of the source code to improve our application, and some ideas like the ``stop'' button.
+
+\noindent%
+\begin{minipage}{\linewidth}
+\vspace{10 mm}
+\makebox[\linewidth]{%
+  \includegraphics[width=0.15 \linewidth]{Images/wificamera-logo.png}}
+\captionof{figure}{Wifi Camera Logo}% only if needed
+\label{wificameralogo}
+\end{minipage} 
+ 
+\subsection{Our solution}
+
 This application, is specially designed to work in a scenario together with the mobile node, however, it may work in any \ac{LAN}. The application basically streams the video and audio captured by the smartphone camera throughout the \ac{LAN} and any client within the network can receive it. So, we have two separated entities acting in this scenario: the app which is the server and a computer which is the client. 
 
 \subsection{Server side}
@@ -714,7 +772,7 @@ The server side, will run the app in a smartphone and it will be usually done by
 \label{table:serverUseCases}
 %\end{center} 
 \end{minipage}
-
+\clearpage
 \noindent%
 \begin{minipage}{\linewidth}
 %\begin{center}
